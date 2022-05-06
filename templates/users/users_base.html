@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% load static%}
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>My Personal Planner</title>
+    <link rel="stylesheet" href={% static 'styles/usuarios/usuarios.css' %}>
+    <link rel="stylesheet" href="{% static 'fontawesomefree/css/solid.css' %}">
+	<script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+</head>
+<body>
+	<header>
+		<h1>
+			<span id="my">My</span>
+			<span id="personal">Personal</span>
+			<span id="planner">Planner</span>
+		</h1>
+	</header>
+	<main>
+		{% block content%}
+		{% endblock %}
+	</main>
+</body>
+</html>

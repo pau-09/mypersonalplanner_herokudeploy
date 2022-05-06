@@ -1,0 +1,60 @@
+@use '../variables' as *
+
+main
+    overflow-y: auto
+    grid-template-rows: auto 1fr
+
+table
+    border-radius: 1rem
+    width: 90%
+    margin: 1rem 0 1rem 0
+    overflow-y: auto
+
+thead
+    position: sticky
+    top: 1rem
+
+    >tr
+        background: $orange2
+        color: $purple4
+        
+        th
+            &:nth-child(1)
+                width: 5%
+        
+            &:nth-child(2)
+                width: 50%
+            
+            &:nth-child(3)
+                width: 20%
+            
+            &:nth-child(4)
+                width: 15%
+            
+            &:nth-child(5)
+                width: 10%
+                &:hover
+                    background-color: $purple5
+                    
+                
+thead, tr, th, td
+    padding: 0.2rem
+    text-align: center
+
+tr>td:nth-child(5):hover, tr>td:nth-child(6):hover
+    background-color: $purple5
+
+
+tr, th, td
+    border: solid $sheer_purple4 0.2rem
+    border-spacing: 0
+    border-radius: 1rem
+
+.fa-pen, .fa-trash-can
+    color: $purple2
+
+#title
+    padding-top: 1rem
+    color: $purple4
+
+		

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style%}
+	<link rel="stylesheet" href={% static 'styles/lists/list.css' %}>
+{% endblock %}
+
+{% block content %}
+	<h2 id='title'>Libros {{title}}</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Título</th>
+				<th>Autor</th>
+				<th>Género</th>
+				<th colspan=2><i class="fa-solid fa-plus fa-lg"></i></th>
+			</tr>
+		</thead>
+		<tbody>
+		{% if books%} 
+			{% for book in books %}
+				<tr>
+					<td>{{forloop.counter}}</td>
+					<td>{{book.title}}</td>
+					<td>{{book.author}}</td>
+					<td>{{book.genre}}</td>
+					<td><a href='#'><i class="fa-solid fa-pen fa-lg"></i></a></td>
+					<td><a href='#'><i class="fa-solid fa-trash-can fa-lg"></i></a></td>
+				</tr>
+			{% endfor %}
+		{% else %}
+			<tr>
+				<td colspan=6><i>Todavía no has agregado libros a esta lista</i></td>
+			</tr>
+		{% endif %}
+		</tbody>
+	</table>
+{% endblock %}

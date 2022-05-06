@@ -1,0 +1,30 @@
+{% extends 'users_base.html' %}
+{% block content %}
+	<h2>INICIAR SESIÓN</h2>
+	<form action="" method="POST">
+		{% csrf_token %}
+		<div>
+			<i class="fa-solid fa-user fa-lg"></i>
+			<input type="text" name="username" placeholder="Usuario"/>
+		</div>
+		<div>
+			<i class="fa-solid fa-key fa-lg"></i>
+			<input type="password" name="password" placeholder="Contraseña"/>
+		</div>
+		<div>
+			<input type="submit" value="Iniciar sesión"/>
+		</div>
+	</form>
+
+	<span class="error">
+		<ul>
+			{% for message in  messages %}
+			<li>{{message}}</li>
+			{% endfor %}
+		</ul>
+	</span>
+
+	<div>
+		¿Todavía no tienes una cuenta? <a href="{% url 'register' %}">Regístrate</a>
+	</div>
+{% endblock %}

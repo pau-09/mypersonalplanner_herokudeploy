@@ -1,0 +1,63 @@
+main {
+  overflow-y: auto;
+  grid-template-rows: auto 1fr;
+}
+
+table {
+  border-radius: 1rem;
+  width: 90%;
+  margin: 1rem 0 1rem 0;
+  overflow-y: auto;
+}
+
+thead {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 1rem;
+}
+thead > tr {
+  background: #F0A6A5;
+  color: #8368A7;
+}
+thead > tr th:nth-child(1) {
+  width: 5%;
+}
+thead > tr th:nth-child(2) {
+  width: 50%;
+}
+thead > tr th:nth-child(3) {
+  width: 20%;
+}
+thead > tr th:nth-child(4) {
+  width: 15%;
+}
+thead > tr th:nth-child(5) {
+  width: 10%;
+}
+thead > tr th:nth-child(5):hover {
+  background-color: #694D8D;
+}
+
+thead, tr, th, td {
+  padding: 0.2rem;
+  text-align: center;
+}
+
+tr > td:nth-child(5):hover, tr > td:nth-child(6):hover {
+  background-color: #694D8D;
+}
+
+tr, th, td {
+  border: solid rgba(131, 104, 167, 0.5568627451) 0.2rem;
+  border-spacing: 0;
+  border-radius: 1rem;
+}
+
+.fa-pen, .fa-trash-can {
+  color: #A777A6;
+}
+
+#title {
+  padding-top: 1rem;
+  color: #8368A7;
+}/*# sourceMappingURL=list.css.map */

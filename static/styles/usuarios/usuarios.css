@@ -1,0 +1,219 @@
+@charset "UTF-8";
+@font-face {
+  font-family: caveat;
+  src: url(../../fonts/Caveat/static/Caveat-Bold.ttf);
+}
+@font-face {
+  font-family: quicksand;
+  src: url(../../fonts/Quicksand/Quicksand-VariableFont_wght.ttf);
+}
+:root {
+  font-size: 18px;
+  font-family: quicksand;
+}
+
+*, *::before, *::after {
+  margin: 0px;
+  padding: 0px;
+  cursor: url(../../cursor.cur), auto !important;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(to bottom, #8368A7, #D88BA4);
+  display: grid;
+  grid-template-rows: 1fr 3fr;
+  place-content: center;
+  color: #EBE1F7;
+}
+
+main {
+  margin: 2rem 0 0 0;
+}
+main h1, main h2 {
+  margin: 0 0 2rem 0;
+}
+main div, main span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main div {
+  padding: 0.5rem 0 0.5rem 0;
+  gap: 0.5rem;
+}
+main div svg {
+  height: 1.5rem;
+}
+
+.error {
+  display: grid;
+  place-content: center;
+  text-align: center;
+  color: #FF9E5D;
+}
+.error li {
+  list-style: none;
+}
+.error li::before, .error li::after {
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font: var(--fa-font-solid);
+  content: "⠀\f071⠀";
+}
+
+header {
+  font-family: caveat;
+  font-size: 30px;
+  align-self: self-end;
+  width: 100%;
+}
+header h1 {
+  color: rgba(235, 225, 247, 0.5019607843);
+  text-shadow: 0 -1.5rem 6rem #EBE1F7, 0 0 1rem #D88BA4, 0 0 0.2rem #D88BA4, 0 0.25rem 0.2rem #201824;
+}
+header h1 span {
+  -webkit-animation: blink linear both;
+          animation: blink linear both;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+a {
+  color: #FFC4AD;
+  text-decoration: none;
+}
+a:hover {
+  color: #3B5DA0;
+}
+
+input {
+  background-color: rgba(131, 104, 167, 0.5568627451);
+  color: #EBE1F7;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  outline: none;
+  box-shadow: inset 0.25rem 0.25rem 0.5rem #684E74, inset -0.25rem -0.25rem 0.5rem #C090D8;
+}
+input::-moz-placeholder {
+  color: rgba(235, 225, 247, 0.5019607843);
+}
+input:-ms-input-placeholder {
+  color: rgba(235, 225, 247, 0.5019607843);
+}
+input::placeholder {
+  color: rgba(235, 225, 247, 0.5019607843);
+}
+input:focus {
+  outline: 1px solid rgba(235, 225, 247, 0.5019607843);
+}
+input[type=submit] {
+  box-shadow: 0.25rem 0.25rem 0.5rem #684E74;
+  background: #8368A7;
+}
+input[type=submit]:focus {
+  outline: none;
+  background: #8368A7;
+  box-shadow: inset 0.25rem 0.25rem 0.5rem #684E74, inset -0.25rem -0.25rem 0.5rem #C090D8;
+}
+
+#my {
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+  -webkit-animation-duration: 2.7s;
+          animation-duration: 2.7s;
+  -webkit-animation-iteration-count: 9;
+          animation-iteration-count: 9;
+}
+
+#personal {
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
+  -webkit-animation-duration: 3.2s;
+          animation-duration: 3.2s;
+  -webkit-animation-iteration-count: 5;
+          animation-iteration-count: 5;
+}
+
+#planner {
+  -webkit-animation-delay: 1.5s;
+          animation-delay: 1.5s;
+  -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
+  -webkit-animation-iteration-count: 12;
+          animation-iteration-count: 12;
+}
+
+@media screen and (max-width: 760px) {
+  header {
+    font-size: 24px;
+  }
+}
+@-webkit-keyframes blink {
+  78% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  79% {
+    color: rgba(46, 34, 49, 0.3137254902);
+  }
+  80% {
+    text-shadow: none;
+  }
+  81% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  82% {
+    color: rgba(46, 34, 49, 0.3137254902);
+    text-shadow: none;
+  }
+  83% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  92% {
+    color: rgba(46, 34, 49, 0.3137254902);
+    text-shadow: none;
+  }
+  92.5% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+}
+@keyframes blink {
+  78% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  79% {
+    color: rgba(46, 34, 49, 0.3137254902);
+  }
+  80% {
+    text-shadow: none;
+  }
+  81% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  82% {
+    color: rgba(46, 34, 49, 0.3137254902);
+    text-shadow: none;
+  }
+  83% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  92% {
+    color: rgba(46, 34, 49, 0.3137254902);
+    text-shadow: none;
+  }
+  92.5% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+}/*# sourceMappingURL=usuarios.css.map */

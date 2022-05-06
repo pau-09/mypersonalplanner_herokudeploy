@@ -1,0 +1,161 @@
+@use '../variables' as *
+
+@font-face 
+    font-family: caveat
+    src: url(../../fonts/Caveat/static/Caveat-Bold.ttf)
+
+@font-face 
+    font-family: quicksand
+    src: url(../../fonts/Quicksand/Quicksand-VariableFont_wght.ttf)
+
+\:root
+    font-size: 18px
+    font-family: quicksand
+
+*, *::before, *::after
+    margin: 0px
+    padding: 0px
+    cursor: url(../../cursor.cur), auto !important 
+ 
+body
+    height: 100vh
+    background: linear-gradient(to bottom, $purple4 , $orange1)
+    display: grid
+    grid-template-rows: 1fr 3fr
+    place-content: center
+    color: $white
+
+main
+    margin: 2rem 0 0 0
+
+    h1, h2
+        margin: 0 0 2rem 0
+    
+    div, span
+        display: flex
+        justify-content: center
+        align-items: center
+
+    div
+        padding: 0.5rem 0 0.5rem 0
+        gap: 0.5rem
+        
+        svg
+            height: 1.5rem
+
+.error
+    display: grid
+    place-content: center
+    text-align: center
+    color: $errors
+    
+    li
+        list-style: none
+
+        &::before, &::after
+            display: inline-block
+            text-rendering: auto
+            -webkit-font-smoothing: antialiased
+            font: var(--fa-font-solid)
+            content: "\2800\f071\2800"
+
+header
+    font:
+        family: caveat
+        size: 30px
+    align-self: self-end
+    width: 100%
+    h1
+        color: $sheer_white
+        text-shadow: 0 -1.5rem 6rem $white, 0 0 1rem $orange1, 0 0 0.2rem $orange1, 0 0.25rem 0.2rem $black
+        span
+            animation: blink linear both
+
+
+h1, h2
+    text-align: center
+
+a
+    color: $orange3
+    text-decoration: none
+
+    &:hover
+        color: $blue
+
+input
+    background-color: $sheer_purple4 
+    color: $white
+    border: none
+    border-radius: 1rem
+    padding: 0.5rem
+    outline: none
+    box-shadow: inset 0.25rem 0.25rem 0.5rem $login_input_shadow, inset -0.25rem -0.25rem 0.5rem $login_input_light
+
+    &::placeholder
+        color: $sheer_white
+
+    &:focus
+        outline: 1px solid $sheer_white
+
+    &[type='submit']
+        box-shadow: 0.25rem 0.25rem 0.5rem $login_input_shadow
+        background: $purple4
+
+        &:focus
+            outline: none
+            background: $purple4
+            box-shadow: inset 0.25rem 0.25rem 0.5rem $login_input_shadow, inset -0.25rem -0.25rem 0.5rem $login_input_light
+
+
+
+#my
+    animation-delay: 0.5s
+    animation-duration: 2.7s
+    animation-iteration-count: 9
+
+#personal
+    animation-delay: 3s
+    animation-duration: 3.2s
+    animation-iteration-count: 5
+
+#planner
+    animation-delay: 1.5s
+    animation-duration:1.5s
+    animation-iteration-count: 12
+
+
+@media screen and (max-width: 760px)
+    header
+        font-size: 24px
+
+
+@keyframes blink 
+    78%
+        color: inherit
+        text-shadow: inherit
+    79%
+        color: $sheer_black
+    
+    80% 
+        text-shadow: none
+    
+    81% 
+        color: inherit
+        text-shadow: inherit
+    
+    82% 
+        color: $sheer_black
+        text-shadow: none
+    
+    83%
+        color: inherit
+        text-shadow: inherit
+    
+    92% 
+        color: $sheer_black
+        text-shadow: none
+    
+    92.5% 
+        color: inherit
+        text-shadow: inherit
+  

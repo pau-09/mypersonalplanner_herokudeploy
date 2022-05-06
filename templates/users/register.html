@@ -1,0 +1,47 @@
+{% extends 'users_base.html' %}
+
+{% block content %}
+	<h2>CREAR UNA CUENTA</h2>
+	<form action="" method="POST">
+		{% csrf_token %}
+		<div>
+			<i class="fa-solid fa-user fa-lg"></i>
+			{{form.username}}
+		</div>
+		<span class="error">
+			{{form.username.errors}}
+		</span>
+
+		<div>
+			<i class="fa-solid fa-envelope fa-lg"></i>
+			{{form.email}}
+		</div>
+		<span class="error">
+			{{form.email.errors}}
+		</span>
+
+		<div>
+			<i class="fa-solid fa-key fa-lg"></i>
+			{{form.password1}}
+		</div>
+		<span class="error">
+			{{form.password1.errors}}
+		</span>
+
+		<div>
+			<i class="fa-solid fa-key fa-lg"></i>
+			{{form.password2}}
+		</div>
+		<span class="error">
+			{{form.password2.errors}}
+		</span>
+
+		<div>
+			<input type="submit" value="Regístrarse">
+		</div>
+	</form>
+
+	<div>¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión</a></div>
+{% endblock %}
+
+		
