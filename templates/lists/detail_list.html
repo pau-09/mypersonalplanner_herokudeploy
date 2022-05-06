@@ -6,13 +6,22 @@
 {% endblock %}
 
 {% block content %}
-	<h2 id='title'>Libros {{title}}</h2>
+	{% if books %} 
+		<h2 id='title'>Libros {{title}}</h2>
+	{% elif movies %}
+		<h2 id='title'>Películas {{title}}</h2>
+	{% endif %}
+
 	<table>
 		<thead>
 			<tr>
 				<th>Id</th>
 				<th>Título</th>
-				<th>Autor</th>
+				{% if books %}
+					<th>Autor</th>
+				{% else %}
+					<th>Año</th>
+				{% endif %}
 				<th>Género</th>
 				<th colspan=2><i class="fa-solid fa-plus fa-lg"></i></th>
 			</tr>
@@ -27,6 +36,19 @@
 					<td>{{book.genre}}</td>
 					<td><a href='#'><i class="fa-solid fa-pen fa-lg"></i></a></td>
 					<td><a href='#'><i class="fa-solid fa-trash-can fa-lg"></i></a></td>
+				</tr>
+			{% endfor %}
+		{% elif movies %} 
+			{% for movie in movies %}
+				<tr>
+					<td>{{forloop.counter}}</td>
+					<td>{{movie.title}}</td>
+					<td>{{movie.year}}</td>
+					<td>{{movie.genre}}</td>
+					<td><a href='#'><i class="fa-solid fa-pen fa-lg"></i></a></td>
+					<td>
+						<a href='#'><i class="fa-solid fa-trash-can fa-lg"></i></a>
+					</td>
 				</tr>
 			{% endfor %}
 		{% else %}

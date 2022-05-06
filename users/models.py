@@ -17,7 +17,7 @@ class User(AbstractUser):
 class BookList(models.Model):
     STATES = [
         ('Completado','Completado'),
-        ('En progreso','En progreso'),
+        ('En proceso','En proceso'),
         ('Abandonado','Abandonado'),
         ('En espera','En espera')
     ]
@@ -46,3 +46,6 @@ class MovieList(models.Model):
 
     class Meta:
         models.UniqueConstraint(fields=['book', 'user'], name='unique_book_per_user')
+    
+    def __str__(self):
+        return f'{self.user} - {self.movie} -----------> {self.state}'

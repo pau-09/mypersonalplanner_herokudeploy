@@ -61,7 +61,7 @@ ROOT_URLCONF = 'mypersonalplanner.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates', 'templates/books', 'templates/movies', 'templates/users'],
+        'DIRS': ['templates', 'templates/lists','templates/users'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,7 +75,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mypersonalplanner.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases

@@ -28,4 +28,5 @@ urlpatterns = [
     path('salir/', logoutUser, name='logout'),
     path('principal/', mainView, name='main'),
     path('libros/', include('books.urls')),
+    path('peliculas/', include('movies.urls')),
 ]

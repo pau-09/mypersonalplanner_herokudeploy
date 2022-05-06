@@ -1,18 +1,20 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from books.models import Book
+from .models import Book
+from users.models import BookList
 
 # Create your views here.
 @login_required(login_url='login')
 def booksView(request):
-    userbooks = request.user.books.through.objects.all()
+    userbooks = BookList.objects.filter(user_id=request.user.id)
     books = [Book.objects.get(id=book.book_id) for book in userbooks]
 
     context = {
         'books': books
     }
 
-    return render(request, 'books_list.html', context)
+    # return render(request, 'list_summary.html', context)
+    return render(request, 'detail_list.html', context)
     
 @login_required(login_url='login')
 def bookListDetailView(request, state):
@@ -23,7 +25,7 @@ def bookListDetailView(request, state):
         'en-espera' : ['En espera', 'en lista de espera'],
     }
 
-    userbooks = request.user.books.through.objects.filter(state=STATES[state][0])
+    userbooks = BookList.objects.filter(user_id=request.user.id, state=STATES[state][0])
     books = [Book.objects.get(id=book.book_id) for book in userbooks]
 
     context = {
@@ -31,4 +33,4 @@ def bookListDetailView(request, state):
         'books': books
     }
 
-    return render(request, 'books_list.html', context)
+    return render(request, 'detail_list.html', context)

@@ -5,20 +5,21 @@ from django.db import models
 class Book(models.Model):
 
     GENRES=[
-        ('Accion', 'Acción'),
+        ('Acción', 'Acción'),
         ('Novela', 'Novela'),
         ('Aventuras', 'Aventuras'),
         ('Ciencia Ficcion', 'Ciencia Ficción'),
         ('Tragedia', 'Tragedia'),
-        ('Fantasia', 'Fantasía'),
+        ('Fantasía', 'Fantasía'),
         ('Documental', 'Documental'),
         ('Drama', 'Drama'),
         ('Musical', 'Musical'),
+        ('Comedia', 'Comedia'),
         ('Suspense', 'Suspense'),
         ('Terror', 'Terror'),
         ('Juvenil', 'Juvenil'),
         ('Romance', 'Romance'),
-        ('Autobiografia','Autobiografía'),
+        ('Autobiografía','Autobiografía'),
     ]
 
     title = models.CharField(max_length=80,unique=True)

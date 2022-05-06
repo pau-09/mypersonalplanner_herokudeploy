@@ -73,10 +73,3 @@ class CreateUserForm(UserCreationForm):
         if commit:
             user.save()
         return user
-
-class EditBookInList(forms.Form):
-    pass
-
-
-class AddBookToList(forms.Form):
-    pass
