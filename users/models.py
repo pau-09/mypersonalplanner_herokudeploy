@@ -34,9 +34,9 @@ class BookList(models.Model):
 
 class MovieList(models.Model):
     STATES = [
-        ('Completado','Completado'),
+        ('Completada','Completada'),
         ('En proceso','En proceso'),
-        ('Abandonado','Abandonado'),
+        ('Abandonada','Abandonada'),
         ('En espera','En espera')
     ]
 

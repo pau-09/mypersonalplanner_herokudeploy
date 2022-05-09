@@ -19,9 +19,9 @@ def moviesView(request):
 @login_required(login_url='login')
 def movieListDetailView(request, state):
     STATES = {
-        'completas' : ['Completado','completadas'],
+        'completas' : ['Completada','completadas'],
         'en-proceso' : ['En proceso', 'en proceso'],
-        'abandonadas' : ['Abandonado', 'abandonadas'],
+        'abandonadas' : ['Abandonada', 'abandonadas'],
         'en-espera' : ['En espera', 'en lista de espera'],
     }
 
@@ -29,6 +29,7 @@ def movieListDetailView(request, state):
     movies = [Movie.objects.get(id=movie.movie_id) for movie in usermovies]
 
     context = {
+        'state': STATES[state][0],
         'title': STATES[state][1],
         'movies': movies
     }

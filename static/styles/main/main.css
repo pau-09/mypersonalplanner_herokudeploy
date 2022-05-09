@@ -2,7 +2,7 @@ main {
   grid-template-rows: auto 1fr auto 1fr;
 }
 
-#piechart, #chart2 {
+#bookChart, #movieChart {
   width: 100%;
   height: 100%;
 }

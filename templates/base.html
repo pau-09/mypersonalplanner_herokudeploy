@@ -6,28 +6,24 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>My Personal Planner</title>
-    <link rel="stylesheet" href={% static 'styles/base/base.css' %}>
+    <link rel="stylesheet" href="{% static 'styles/base/base.css' %}">
 	{% block style%}
 	{% endblock %}
     <link rel="stylesheet" href="{% static 'fontawesomefree/css/solid.css' %}">
 	<script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+	<script src="{% static 'sweetify/dist/sweetalert2.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'sweetify/dist/sweetalert2.css' %}">
 </head>
 <body>
 	<header>
 			<h1 class="title">My Personal Planner</h1>
 		<div>
 			<p id="user_welcome">Hola <b>{{request.user}}</b></p>
-			<label id="menu_label" for="menu_checkbox">
-				<i class="fa-solid fa-bars fa-lg"></i>
-			</label>
+			<label id="menu_label" for="menu_checkbox"><i class="fa-solid fa-bars fa-lg"></i></label>
 			<input type="checkbox" id="menu_checkbox"/>
 			<div>
-				<a href={% url 'main' %}>
-					<i class="fa-solid fa-house-chimney fa-lg"></i>
-				</a>
-				<a href={% url 'logout' %}>
-					<i class="fa-solid fa-right-from-bracket fa-lg"></i>
-				</a>
+				<a href="{% url 'main' %}"><i class="fa-solid fa-house-chimney fa-lg"></i></a>
+				<a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket fa-lg"></i></a>
 			</div>
 		</div>
 	</header>
@@ -67,11 +63,9 @@
 		function setup(e){
 			document.querySelector('#menu_label').addEventListener('click', toggleMenu)
 			try{
-				var el=document.querySelectorAll('li > a');
-				var url=document.location.href;
-				// console.log(url)
+				const el = document.querySelectorAll('li > a');
+				const url = document.location.href;
 				el.forEach((a)=>{
-					// console.log(a.href)
 					if (url==a.href){
 						a.className = 'act';
 					}
@@ -95,7 +89,8 @@
 			}
 		}
 	</script>
-	
+	{% block script %}
+	{% endblock %}
 
 
 	</body>

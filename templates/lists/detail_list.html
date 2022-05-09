@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block style%}
+{% block style %}
 	<link rel="stylesheet" href={% static 'styles/lists/list.css' %}>
 {% endblock %}
 
@@ -34,8 +34,8 @@
 					<td>{{book.title}}</td>
 					<td>{{book.author}}</td>
 					<td>{{book.genre}}</td>
-					<td><a href='#'><i class="fa-solid fa-pen fa-lg"></i></a></td>
-					<td><a href='#'><i class="fa-solid fa-trash-can fa-lg"></i></a></td>
+					<td id="{{book.id}}-{{book.title}}"><i class="fa-solid fa-pen fa-lg"></i></td>
+					<td id="{{book.id}}-{{book.title}}"><i class="fa-solid fa-trash-can fa-lg"></i></td>
 				</tr>
 			{% endfor %}
 		{% elif movies %} 
@@ -45,17 +45,198 @@
 					<td>{{movie.title}}</td>
 					<td>{{movie.year}}</td>
 					<td>{{movie.genre}}</td>
-					<td><a href='#'><i class="fa-solid fa-pen fa-lg"></i></a></td>
-					<td>
-						<a href='#'><i class="fa-solid fa-trash-can fa-lg"></i></a>
-					</td>
+					<td id="{{movie.id}}-{{movie.title}}"><a href='#'><i class="fa-solid fa-pen fa-lg"></i></a></td>
+					<td><i class="fa-solid fa-trash-can fa-lg"></i></td>
 				</tr>
 			{% endfor %}
 		{% else %}
 			<tr>
-				<td colspan=6><i>Todavía no has agregado libros a esta lista</i></td>
+				<td colspan=6><i>Todavía no has agregado entradas a esta lista</i></td>
 			</tr>
 		{% endif %}
 		</tbody>
 	</table>
+{% endblock %}
+
+{% block script %}
+	{% if books %}
+		<script>
+			const edit_buttons = document.querySelectorAll('tbody>tr>td:nth-child(5)')
+			edit_buttons.forEach(button => button.addEventListener('click', editEntry))
+			
+			const delete_buttons = document.querySelectorAll('tbody>tr>td:nth-child(6)')
+			delete_buttons.forEach(button => button.addEventListener('click', deleteEntry))
+
+			async function editEntry(e){
+				const book = e.currentTarget.id.split('-')
+				const book_id = book[0]
+				const book_title = book[1]
+
+				const { value: state } = await Swal.fire({
+					title: 'Cambiar estado del libro',
+					input: 'select',
+					inputOptions: {
+						'Completado': 'Completado',
+						'En proceso': 'En proceso',
+						'Abandonado': 'Abandonado',
+						'En espera': 'En espera'
+					},
+					allowOutsideClick: false,
+					color: '#A777A6',
+					confirmButtonText: 'Cambiar',
+					confirmButtonColor: '#8368A7',
+					cancelButtonText: 'Cancelar',
+					cancelButtonColor: '#FF9E5D',
+					inputPlaceholder: 'Selecciona un estado',
+					showCancelButton: true,
+					inputValidator: (value) => {
+						return new Promise((resolve) => {
+							if (value.toLowerCase() === '{{state}}'.toLowerCase()){
+								resolve(`Este libro ya está ${value}`)
+							} else{
+								resolve()
+								
+							}
+						})
+					}
+				})
+				
+				if (state) {
+					
+					Swal.fire(`'${book_title}' ahora esta ${state.toLowerCase()}`).then(result =>{
+						const main = document.querySelector('main');
+
+						const form = document.createElement('form');
+						form.setAttribute('method','POST');
+						form.setAttribute('action','{{request.path}}');
+						main.appendChild(form);
+
+						form.innerHTML = '{% csrf_token %}';
+
+						const book = document.createElement('input');
+						book.setAttribute('type', 'hidden');
+						book.setAttribute('value', book_id);
+						book.setAttribute('name', 'book_id');
+						book.setAttribute('id', 'book_id');
+						form.appendChild(book);
+						
+						const new_state = document.createElement('input');
+						new_state.setAttribute('type', 'hidden');
+						new_state.setAttribute('value', state);
+						new_state.setAttribute('name', 'new_state');
+						new_state.setAttribute('id', 'new_state');
+						form.appendChild(new_state);
+						
+						form.submit();
+					})
+				}
+			}
+
+			async function deleteEntry(e){
+				const book = e.currentTarget.id.split('-')
+				const book_id = book[0]
+				const book_title = book[1]
+
+				const { value: confirmed } = await Swal.fire({
+					icon: 'warning',
+					title: `¿Estás seguro?`,
+					text: `'${book_title}' quedará eliminado de tu lista.`,
+					allowOutsideClick: false,
+					color: '#A777A6',
+					confirmButtonText: 'Si, quiero eliminarlo',
+					confirmButtonColor: '#8368A7',
+					showCancelButton: true,
+					cancelButtonText: 'Cancelar',
+					cancelButtonColor: '#FF9E5D',
+				})
+
+				if (confirmed) {
+					
+					const Toast = Swal.mixin({
+						toast: true,
+						position: 'bottom-end',
+						showConfirmButton: false,
+						timer: 2500,
+						timerProgressBar: true,
+						didOpen: (toast) => {
+							toast.addEventListener('mouseenter', Swal.stopTimer)
+							toast.addEventListener('mouseleave', Swal.resumeTimer)
+						},
+						target:'main'
+					})
+					
+					Toast.fire({
+						icon: 'success',
+						title:`'${book_title}' ha sido eliminado`,
+					}).then(result =>{
+						const main = document.querySelector('main');
+
+						const form = document.createElement('form');
+						form.setAttribute('method','POST');
+						form.setAttribute('action','{{request.path}}');
+						main.appendChild(form);
+
+						form.innerHTML = '{% csrf_token %}';
+
+						const book = document.createElement('input');
+						book.setAttribute('type', 'hidden');
+						book.setAttribute('value', book_id);
+						book.setAttribute('name', 'delete_id');
+						book.setAttribute('id', 'delete_id');
+						form.appendChild(book);
+						
+						form.submit();
+					})
+				}
+			}
+		</script>
+	{% else %}
+	<script>
+		const buttons = document.querySelectorAll('tbody>tr>td:nth-child(5)')
+		buttons.forEach(button => button.addEventListener('click', editEntry))
+		
+		
+		async function editEntry(e){
+			const movie = e.currentTarget.id.split('-')
+			const movie_id = movie[0]
+			const movie_title = movie[1]
+			
+			
+			const { value: state } = await Swal.fire({
+				title: 'Cambiar estado de la película',
+				input: 'select',
+				inputOptions: {
+						'completada': 'Completada',
+						'en proceso': 'En proceso',
+						'abandonada': 'Abandonada',
+						'en espera': 'En espera'
+					},
+					allowOutsideClick: false,
+					color: '#A777A6',
+					confirmButtonText: 'Cambiar',
+					confirmButtonColor: '#8368A7',
+					cancelButtonText: 'Cancelar',
+					cancelButtonColor: '#FF9E5D',
+					inputPlaceholder: 'Selecciona un estado',
+					showCancelButton: true,
+					inputValidator: (value) => {
+						return new Promise((resolve) => {
+							if (value === '{{state}}'.toLowerCase()){
+								resolve(`Esta película ya está ${value}`)
+							} else{
+								resolve()
+								
+							}
+						})
+					}
+				})
+				
+				if (state) {
+					Swal.fire(`'${movie_title}' ahora esta ${state}`).then(result =>{
+						window.location.href = (`{% url 'main' %}`)
+					})
+				}
+			}
+			</script>
+	{% endif %}
 {% endblock %}

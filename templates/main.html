@@ -8,26 +8,18 @@
 {% block content %}
 	<h2>Aquí un resumen</h2>
 
-	<div id="piechart"></div>
+	<div id="bookChart"></div>
     <hr/>
-    <div id="chart2"></div>
+    <div id="movieChart"></div>
 
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-        google.charts.setOnLoadCallback(drawChart2);
+        google.charts.setOnLoadCallback(drawBookChart);
+        google.charts.setOnLoadCallback(drawMovieChart);
 
-        function drawChart() {
-
-            var data = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                ['Work',     11],
-                ['Eat',      2],
-                ['Commute',  2],
-                ['Watch TV', 2],
-                ['Sleep',    7]
-            ]);
+        function drawBookChart() {
+            var data = google.visualization.arrayToDataTable({{books|safe}});
 
             var options = {
                 backgroundColor: 'transparent',
@@ -35,24 +27,16 @@
                 legend:{
                     alignment: 'center'
                 },
-                pieSliceText: 'label',
-                colors: ['#FFBDC9', '#C3CFFF', '#ADD0A4', '#99A1EB', '#E8A895']
+                colors: ['#FFBDC9', '#C3CFFF', '#ADD0A4', '#99A1EB', '#E8A895'],
             };
 
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            var chart = new google.visualization.PieChart(document.getElementById('bookChart'));
 
             chart.draw(data, options);
         }
-        function drawChart2() {
+        function drawMovieChart() {
 
-            var data = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                ['Work',     11],
-                ['Eat',      2],
-                ['Commute',  2],
-                ['Watch TV', 2],
-                ['Sleep',    7]
-            ]);
+            var data = google.visualization.arrayToDataTable({{movies|safe}});
 
             var options = {
                 backgroundColor: 'transparent',
@@ -60,11 +44,10 @@
                 legend:{
                     alignment: 'center'
                 },
-                pieSliceText: 'label',
                 colors: ['#FFBDC9', '#C3CFFF', '#ADD0A4', '#99A1EB', '#E8A895']
             };
 
-            var chart = new google.visualization.PieChart(document.getElementById('chart2'));
+            var chart = new google.visualization.PieChart(document.getElementById('movieChart'));
 
             chart.draw(data, options);
         }
