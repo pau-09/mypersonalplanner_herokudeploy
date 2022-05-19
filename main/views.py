@@ -1,6 +1,7 @@
 import json
+from django.http import HttpResponse
 
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 
 from users.models import BookList, MovieList
@@ -33,4 +34,12 @@ def mainView(request):
 
     }
     return render(request, 'main.html', context)
-    
+
+@login_required(login_url='login')
+def searchView(request):
+    if 'search' in request.POST.keys():
+        context = {
+            'search': request.POST['search']
+        }
+        return render(request, 'search.html', context)
+    redirect('main')

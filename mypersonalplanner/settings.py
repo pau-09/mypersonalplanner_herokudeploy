@@ -62,7 +62,7 @@ ROOT_URLCONF = 'mypersonalplanner.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates', 'templates/lists','templates/users'],
+        'DIRS': ['templates', 'templates/lists', 'templates/users', 'templates/main'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

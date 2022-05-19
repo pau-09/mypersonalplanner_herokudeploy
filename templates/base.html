@@ -11,16 +11,20 @@
 	{% endblock %}
     <link rel="stylesheet" href="{% static 'fontawesomefree/css/solid.css' %}">
 	<script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
-	<script src="{% static 'sweetify/dist/sweetalert2.js' %}"></script>
-	<link rel="stylesheet" href="{% static 'sweetify/dist/sweetalert2.css' %}">
+	<script src="{% static 'sweetalert/dist/sweetalert2.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'sweetalert/dist/sweetalert2.css' %}">
 </head>
 <body>
 	<header>
 			<h1 class="title">My Personal Planner</h1>
-		<div>
-			<p id="user_welcome">Hola <b>{{request.user}}</b></p>
-			<label id="menu_label" for="menu_checkbox"><i class="fa-solid fa-bars fa-lg"></i></label>
-			<input type="checkbox" id="menu_checkbox"/>
+			<form action={%  url 'search' %} method='POST'>
+				{% csrf_token %}
+				<input type="search" id="search" name="search" placeholder="Busca aquí"/>
+			</form>
+			<div>
+				<label id="menu_label" for="menu_checkbox"><i class="fa-solid fa-bars fa-lg"></i></label>
+				<p id="user_welcome">Hola <b>{{request.user}}</b></p>
+				<input type="checkbox" id="menu_checkbox"/>
 			<div>
 				<a href="{% url 'main' %}"><i class="fa-solid fa-house-chimney fa-lg"></i></a>
 				<a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket fa-lg"></i></a>
@@ -47,7 +51,7 @@
 			</li>
 		</ul>
 	</nav>
-	<main>
+	<main id='toast_target'>
 		<div id="hide_content"></div>
 		{% block content%}
 		{% endblock %}

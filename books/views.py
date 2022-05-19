@@ -1,5 +1,3 @@
-# import sweetify
-import re
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import Book
@@ -26,23 +24,46 @@ def bookListDetailView(request, state):
         'abandonados': ['Abandonado', 'abandonados'],
         'en-espera': ['En espera', 'en lista de espera'],
     }
+    toast = ''
 
     if request.method == 'POST':
         user = request.user
+        toast_title = ''
+
         if 'book_id' in request.POST.keys() and request.POST['new_state'] in ('Completado', 'En proceso', 'Abandonado', 'En espera'):
             book_id = request.POST['book_id']
-            book = user.books.through.objects.get(user_id=user.id, book_id=book_id)
+            book = BookList.objects.get(user_id=user.id, book_id=book_id)
 
             book.state = request.POST['new_state']
             book.save()
             user.save()
+            toast_title = f"'{Book.objects.get(id=book_id).title}' ha sido editado con éxito."
 
-        elif request.POST['delete_id']:
+        elif 'delete_id' in request.POST.keys():
             book_id = request.POST['delete_id']
             book = Book.objects.get(id=book_id)
             user.books.remove(book)
-            book.save()
             user.save()
+            toast_title = f"'{book.title}' ha sido eliminado con éxito."
+        
+        toast = '''Swal.mixin({{
+                    title: {title},
+                    toast: true,
+                    position: 'bottom-right',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {{
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }},
+                    customClass: {{
+                        container: 'toast',
+                    }},
+                    background: '#CDF8B8',
+                    color: '#958CAB',
+                    target: '#toast_target'
+                }})'''.format_map({'title': toast_title, })
 
     userbooks = BookList.objects.filter(user_id=request.user.id, state=STATES[state][0])
     books = [Book.objects.get(id=book.book_id) for book in userbooks]
@@ -50,7 +71,8 @@ def bookListDetailView(request, state):
     context = {
         'state': STATES[state][0],
         'title': STATES[state][1],
-        'books': books
+        'books': books,
+        'toast': toast
     }
 
     return render(request, 'detail_list.html', context)

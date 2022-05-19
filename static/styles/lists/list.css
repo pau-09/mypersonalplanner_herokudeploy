@@ -16,7 +16,7 @@ thead {
   top: 1rem;
 }
 thead > tr {
-  background: #F0A6A5;
+  background: #FFC4AD;
   color: #8368A7;
 }
 thead > tr th:nth-child(1) {
@@ -60,4 +60,18 @@ tr, th, td {
 #title {
   padding-top: 1rem;
   color: #8368A7;
+}
+
+#toast_target {
+  position: relative;
+}
+
+.toast {
+  position: absolute !important;
+}
+
+@media screen and (max-width: 760px) {
+  thead > tr > th:nth-child(4), thead > tr > th:nth-child(3), tbody > tr > td:nth-child(4), tbody > tr > td:nth-child(3) {
+    display: none;
+  }
 }/*# sourceMappingURL=list.css.map */

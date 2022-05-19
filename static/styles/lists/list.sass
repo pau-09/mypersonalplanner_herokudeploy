@@ -15,7 +15,7 @@ thead
     top: 1rem
 
     >tr
-        background: $orange2
+        background: $orange3
         color: $purple4
         
         th
@@ -44,7 +44,6 @@ thead, tr, th, td
 tr>td:nth-child(5):hover, tr>td:nth-child(6):hover
     background-color: $purple5
 
-
 tr, th, td
     border: solid $sheer_purple4 0.2rem
     border-spacing: 0
@@ -57,4 +56,13 @@ tr, th, td
     padding-top: 1rem
     color: $purple4
 
-		
+#toast_target
+    position: relative
+
+.toast
+    position: absolute !important
+
+
+@media screen and (max-width: 760px)
+    thead>tr>th:nth-child(4),thead>tr>th:nth-child(3), tbody>tr>td:nth-child(4), tbody>tr>td:nth-child(3)
+        display: none
