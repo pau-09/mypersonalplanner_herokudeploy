@@ -7,22 +7,22 @@
 
 {% block content %}
 	{% if books %} 
-		<h2 id='title'>Libros {{title}}</h2>
+		<h2>Libros {{title}}</h2>
 	{% elif movies %}
-		<h2 id='title'>Películas {{title}}</h2>
+		<h2>Películas {{title}}</h2>
 	{% endif %}
 
 	<table>
 		<thead>
 			<tr>
-				<th>Id</th>
-				<th>Título</th>
+				<th id='id'></th>
+				<th id='title'>Título</th>
 				{% if books %}
-					<th>Autor</th>
+					<th id='author'>Autor</th>
 				{% else %}
-					<th>Año</th>
+					<th id='year'>Año</th>
 				{% endif %}
-				<th>Género</th>
+				<th id='genre'>Género</th>
 				<th colspan=2><i class="fa-solid fa-plus fa-lg"></i></th>
 			</tr>
 		</thead>
@@ -34,8 +34,8 @@
 					<td>{{book.title}}</td>
 					<td>{{book.author}}</td>
 					<td>{{book.genre}}</td>
-					<td id="{{book.id}}-{{book.title}}"><i class="fa-solid fa-pen fa-lg"></i></td>
-					<td id="{{book.id}}-{{book.title}}"><i class="fa-solid fa-trash-can fa-lg"></i></td>
+					<td id="{{book.id}}"><i class="fa-solid fa-pen fa-lg"></i></td>
+					<td id="{{book.id}}" data-title="{{book.title}}"><i class="fa-solid fa-trash-can fa-lg"></i></td>
 				</tr>
 			{% endfor %}
 		{% elif movies %} 
@@ -45,8 +45,8 @@
 					<td>{{movie.title}}</td>
 					<td>{{movie.year}}</td>
 					<td>{{movie.genre}}</td>
-					<td id="{{movie.id}}-{{movie.title}}"><i class="fa-solid fa-pen fa-lg"></i></td>
-					<td id="{{movie.id}}-{{movie.title}}"><i class="fa-solid fa-trash-can fa-lg"></i></td>
+					<td id="{{movie.id}}"><i class="fa-solid fa-pen fa-lg"></i></td>
+					<td id="{{movie.id}}" data-title="{{movie.title}}"><i class="fa-solid fa-trash-can fa-lg"></i></td>
 				</tr>
 			{% endfor %}
 		{% else %}
@@ -65,23 +65,33 @@
 		
 		{% if books %}
 			form_edit_input_name = 'book_id';
-			alert_title = 'Cambiar estado del libro';
-			alert_options = {
+			form_add_input_name = 'new_book_id';
+			
+			add_alert_title = 'Añadir un libro ';
+			add_alert_options = {{books_to_add|safe}};
+
+			edit_alert_title = 'Cambiar estado del libro';
+			state_options = {
 				'Completado': 'Completado',
 				'En proceso': 'En proceso',
 				'Abandonado': 'Abandonado',
 				'En espera': 'En espera'};
-			alert_select_error = `Este libro ya está `;
+			edit_alert_error = 'Este libro ya está ';
 
 		{% elif movies %}
 			form_edit_input_name = 'movie_id';
-			alert_title = 'Cambiar estado de la película';
-			alert_options = {
+			form_add_input_name = 'new_movie_id';
+
+			add_alert_title = 'Añadir una película ';
+			add_alert_options = {{movies_to_add|safe}};
+
+			edit_alert_title = 'Cambiar estado de la película';
+			state_options = {
 				'Completada': 'Completada',
 				'En proceso': 'En proceso',
 				'Abandonada': 'Abandonada',
 				'En espera': 'En espera'};
-			alert_select_error = `Esta película ya está `;
+			edit_alert_error = 'Esta película ya está ';
 		{% endif %}
 
 		{% if toast %}

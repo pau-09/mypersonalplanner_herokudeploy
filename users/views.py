@@ -1,11 +1,12 @@
+import imp
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-# from .forms import UserForm
 
 from .forms import CreateUserForm
+from books.forms import BookForm
 
 # Create your views here.
 def registerView(request):
@@ -49,11 +50,21 @@ def loginView(request):
         else:
             messages.info(request, 'El usuario o la contaseña son incorrectos')
 
-
-    context = {}
-    return render(request, 'login.html', context)
+    return render(request, 'login.html')
 
 
-def logoutUser(request):
+def logoutUserView(request):
     logout(request)
     return redirect('login')
+
+def addEntryView(request):
+    if not request.user.is_staff:
+        redirect('main')
+
+    form = BookForm
+
+    
+    context = {
+        'form' : form
+    }
+    return render(request, 'add_entry.html', context)

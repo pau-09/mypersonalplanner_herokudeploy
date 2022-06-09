@@ -34,8 +34,8 @@ thead > tr th:nth-child(4) {
 thead > tr th:nth-child(5) {
   width: 10%;
 }
-thead > tr th:nth-child(5):hover {
-  background-color: #694D8D;
+thead > tr th:hover {
+  background-color: #F0A6A5;
 }
 
 thead, tr, th, td {
@@ -57,7 +57,7 @@ tr, th, td {
   color: #A777A6;
 }
 
-#title {
+h2 {
   padding-top: 1rem;
   color: #8368A7;
 }

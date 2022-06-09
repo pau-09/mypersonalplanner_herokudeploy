@@ -1,21 +1,19 @@
 from django.db import models
-# from users.models import User
 
-# Create your models here.
 class Movie(models.Model):
 
     GENRES=[
-        ('Accion', 'Acción'),
+        ('Acción', 'Acción'),
         ('Aventuras', 'Aventuras'),
-        ('Ciencia Ficcion', 'Ciencia Ficción'),
+        ('Ciencia Ficción', 'Ciencia Ficción'),
         ('Comedia', 'Comedia'),
-        ('Fantasia', 'Fantasía'),
+        ('Fantasía', 'Fantasía'),
         ('Documental', 'Documental'),
         ('Drama', 'Drama'),
         ('Musical', 'Musical'),
         ('Suspense', 'Suspense'),
         ('Terror', 'Terror'),
-        ('Animacion', 'Animación'),
+        ('Animación', 'Animación'),
         ('Romance', 'Romance'),
     ]
 

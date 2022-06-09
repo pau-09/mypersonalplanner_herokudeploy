@@ -1,10 +1,7 @@
-from django.forms import forms
+from django.forms import ModelForm
+from .models import Book
 
-class AddBookToList(forms.Form):
-    pass
-
-class EditBookFromList(forms.Form):
-    pass
-
-class DeleteBookFromList(forms.Form):
-    pass
+class BookForm(ModelForm):
+    class Meta: 
+        model = Book
+        fields = ['title', 'author', 'year', 'genre']

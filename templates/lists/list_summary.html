@@ -1,5 +1,33 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block style%}
+  <link rel="stylesheet" href="{% static 'styles/lists/summary.css' %}">
+{% endblock %}
 
 {% block content %}
-	<p>Resumen Libros</p>
+	<h2>Aquí tienes un resumen de tus {{entry_type}}</h2>
+
+	<div id="summaryChart"></div>
+	<hr id="vertical"/>
+	
+	<div id="authorsChart" class="sideChart"></div>
+	<hr id="horizontal"/>
+	<div id="genresChart" class="sideChart"></div>
+
+{% endblock %}
+	
+{% block script%}
+	<script>
+		statesData = {{statesData|safe}}
+		authorsData = {{authorsData|safe}}
+		{% if authorsData %}
+			authorsDataTitle = 'Autores'
+		{% elif directorsData %}
+			authorsDataTitle = 'Directores'
+		{% endif %}
+		genresData = {{genresData|safe}}
+	</script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="{% static 'js/list_summary.js' %}" ></script>
 {% endblock %}

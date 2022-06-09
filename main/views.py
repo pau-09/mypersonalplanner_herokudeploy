@@ -37,9 +37,11 @@ def mainView(request):
 
 @login_required(login_url='login')
 def searchView(request):
+    search = ''
     if 'search' in request.POST.keys():
-        context = {
-            'search': request.POST['search']
-        }
-        return render(request, 'search.html', context)
-    redirect('main')
+        search = request.POST['search']
+    
+    context = {
+        'search': search
+    }
+    return render(request, 'search.html', context)

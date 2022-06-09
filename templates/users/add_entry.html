@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style%}
+{% endblock %}
+
+{% block content %}
+	<h2>Aquí tienes un resumen</h2>
+    <form action="" method="POST">
+		{% csrf_token %}
+		<div>
+			<i class="fa-solid fa-book fa-lg"></i>
+			{{form.title}}
+		</div>
+
+		<div>
+			<i class="fa-solid fa-user fa-lg"></i>
+			{{form.author}}
+		</div>
+
+		<div>
+			<i class="fa-solid fa-calendar-days fa-lg"></i>
+			{{form.year}}
+		</div>
+
+		<div>
+			<i class="fa-solid fa-bars-staggered fa-lg"></i>
+			{{form.genre}}
+		</div>
+
+		<div>
+			<input type="submit" value="Añadir">
+		</div>
+	</form>
+{% endblock %}
+{% block script %}
+    <script>
+        books = {{books|safe}}
+        movies = {{movies|safe}}
+    </script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="{% static 'js/main.js' %}" ></script>
+{% endblock %}

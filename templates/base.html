@@ -7,26 +7,26 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>My Personal Planner</title>
     <link rel="stylesheet" href="{% static 'styles/base/base.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesomefree/css/solid.css' %}">
+	<link rel="stylesheet" href="{% static 'sweetalert/dist/sweetalert2.css' %}">
 	{% block style%}
 	{% endblock %}
-    <link rel="stylesheet" href="{% static 'fontawesomefree/css/solid.css' %}">
 	<script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
 	<script src="{% static 'sweetalert/dist/sweetalert2.js' %}"></script>
-	<link rel="stylesheet" href="{% static 'sweetalert/dist/sweetalert2.css' %}">
 </head>
 <body>
 	<header>
 			<h1 class="title">My Personal Planner</h1>
-			<form action={%  url 'search' %} method='POST'>
-				{% csrf_token %}
-				<input type="search" id="search" name="search" placeholder="Busca aquí"/>
-			</form>
 			<div>
 				<label id="menu_label" for="menu_checkbox"><i class="fa-solid fa-bars fa-lg"></i></label>
 				<p id="user_welcome">Hola <b>{{request.user}}</b></p>
 				<input type="checkbox" id="menu_checkbox"/>
 			<div>
 				<a href="{% url 'main' %}"><i class="fa-solid fa-house-chimney fa-lg"></i></a>
+				{% if request.user.is_staff %}
+					<a href="{% url 'addEntry' %}"><i class="fa-solid fa-circle-plus fa-lg"></i></a>
+				{% endif %}
+				{% comment %} <a href="{% url 'search' %}"><i class="fa-solid fa-magnifying-glass fa-lg"></i></a> {% endcomment %}
 				<a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket fa-lg"></i></a>
 			</div>
 		</div>
