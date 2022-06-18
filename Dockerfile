@@ -9,4 +9,5 @@ WORKDIR /app
 
 ADD . .
 
-CMD gunicorn mypersonalplanner.wsgi:application --bind 0.0.0.0:$PORT 
+EXPOSE 8000
+CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "mypersonalplanner.wsgi:application"]
