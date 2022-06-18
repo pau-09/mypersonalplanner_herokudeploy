@@ -2,32 +2,31 @@
 {% load static %}
 
 {% block style%}
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/users/add_entry.css' %}">
 {% endblock %}
 
 {% block content %}
-	<h2>Aquí tienes un resumen</h2>
+	<h2>Añadir una entrada</h2>
+	
     <form action="" method="POST">
 		{% csrf_token %}
+		<div id="entryTypeDiv">
+			<i class="fa-solid fa-clipboard-list fa-xl"></i>
+			{{form.type}}
+		</div>
 		<div>
-			<i class="fa-solid fa-book fa-lg"></i>
+			<i class="fa-solid fa-header fa-xl"></i>
 			{{form.title}}
 		</div>
-
 		<div>
-			<i class="fa-solid fa-user fa-lg"></i>
-			{{form.author}}
+			<i class="fa-solid fa-user fa-xl"></i>
+			{{form.author_or_director}}
 		</div>
-
 		<div>
-			<i class="fa-solid fa-calendar-days fa-lg"></i>
+			<i class="fa-solid fa-calendar-days fa-xl"></i>
 			{{form.year}}
 		</div>
-
-		<div>
-			<i class="fa-solid fa-bars-staggered fa-lg"></i>
-			{{form.genre}}
-		</div>
-
+		<div id="genreDiv"></div>
 		<div>
 			<input type="submit" value="Añadir">
 		</div>
@@ -35,9 +34,69 @@
 {% endblock %}
 {% block script %}
     <script>
-        books = {{books|safe}}
-        movies = {{movies|safe}}
-    </script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="{% static 'js/main.js' %}" ></script>
+		const toast_title = "{{toast_title}}";
+		const icon = "{{icon}}";
+		const background = "{{toast_background}}";
+		
+		const book_icon = '<i class="fa-solid fa-book fa-xl"></i>';
+		const book_genres = `{{form.book_genre|safe}}`
+		
+		const movie_icon = '<i class="fa-solid fa-film fa-xl"></i>';
+		const movie_genres = `{{form.movie_genre|safe}}`;
+		
+		const genreDiv = document.querySelector('#genreDiv');
+		
+		document.addEventListener('DOMContentLoaded', formSetup)
+
+		if (toast_title !== ""){
+			Swal.mixin({
+				title: toast_title,
+				icon: icon,
+				toast: true,
+				position: "bottom-right",
+				showConfirmButton: false,
+				timer: 3000,
+				timerProgressBar: true,
+				didOpen: (toast) => {
+					toast.addEventListener("mouseenter", Swal.stopTimer)
+					toast.addEventListener("mouseleave", Swal.resumeTimer)
+				},
+				customClass: {
+					container: "toast",
+				},
+				background: background,
+				color: "#958CAB",
+				target: "#toast_target"
+			}).fire()
+		}
+		
+		function formSetup(e){
+			genreDiv.innerHTML = `${book_icon} ${book_genres}`
+
+			const entryTypeSel = document.querySelector('#entryTypeDiv>select')
+			entryTypeSel.addEventListener('change', toggleGenre)
+			
+			if(entryTypeSel.value == 'Book'){
+				genresHTML = `${book_icon} ${book_genres}`
+			}else if(entryTypeSel.value == 'Movie'){
+				genresHTML = `${movie_icon} ${movie_genres}`
+			}
+
+			genreDiv.innerHTML = genresHTML
+		}
+
+		function toggleGenre(e){
+			const entryTypeSel = e.currentTarget;
+
+			if(entryTypeSel.value == 'Book'){
+				genresHTML = `${book_icon} ${book_genres}`;
+			}else if(entryTypeSel.value == 'Movie'){
+				genresHTML = `${movie_icon} ${movie_genres}`;
+			}
+
+			genreDiv.innerHTML = genresHTML;
+		}
+
+
+	</script>
 {% endblock %}

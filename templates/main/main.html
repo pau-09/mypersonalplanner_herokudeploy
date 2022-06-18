@@ -2,22 +2,22 @@
 {% load static %}
 
 {% block style%}
-  <link rel="stylesheet" href={% static 'styles/main/main.css' %}>
+  <link rel="stylesheet" type="text/css" href={% static 'styles/main/main.css' %}>
 {% endblock %}
 
 {% block content %}
 	<h2>Aquí tienes un resumen</h2>
-
-	<div id="bookChart" class="chart"></div>
+	<div id="statesChart" class="chart"></div>
     <hr/>
-    <div id="movieChart" class="chart"></div>
+	<div id="totalCountChart" class="chart"></div>
 
 {% endblock %}
 {% block script %}
     <script>
-        books = {{books|safe}}
-        movies = {{movies|safe}}
+        summaryData = {{summaryData|safe}};
+        book_count = {{total_book_count|safe}};
+        movie_count = {{total_movie_count|safe}};
     </script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="{% static 'js/main.js' %}" ></script>
+    <script src="{% static 'js/main.js' %}"></script>
 {% endblock %}

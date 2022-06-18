@@ -1,7 +1,29 @@
 google.charts.load('current', {'packages':['corechart', 'bar']});
-google.charts.setOnLoadCallback(drawSummaryChart);
-google.charts.setOnLoadCallback(drawAuthorsChart);
-google.charts.setOnLoadCallback(drawGenresChart);
+
+if(!total_count){
+    removeChartsDivs();
+}else{
+    google.charts.setOnLoadCallback(drawSummaryChart);
+    google.charts.setOnLoadCallback(drawAuthorsChart);
+    google.charts.setOnLoadCallback(drawGenresChart);
+}
+
+function removeChartsDivs(){
+    const main = document.querySelector('main');
+
+    main.removeChild(document.querySelector('#summaryChart'));
+    main.removeChild(document.querySelector('#vertical'));
+    main.removeChild(document.querySelector('#authorsChart'));
+    main.removeChild(document.querySelector('#horizontal'));
+    main.removeChild(document.querySelector('#genresChart'));
+
+    const warningDiv = document.createElement('div');
+    warningDiv.setAttribute('id', 'noDataDiv');
+    warningDiv.innerHTML = `<i><p>¡No tienes ninguna entrada!</p>
+        <p>Agrega al menos una entrada a una de tus listas.</p></i>`;
+    
+    main.appendChild(warningDiv);
+}
 
 function drawSummaryChart() {
     const data = google.visualization.arrayToDataTable(statesData);
@@ -12,7 +34,6 @@ function drawSummaryChart() {
         fontName: 'Quicksand',
         is3D: true,
         legend:{
-            positon: 'top',
             alignment: 'center'
         },
         legendTextStyle: {
@@ -57,11 +78,12 @@ function drawAuthorsChart() {
             },
         },
         legend:{
+            position: 'none',
             alignment: 'center',
             textStyle: {
                 color: '#8368A7',
                 fontName: 'Quicksand',
-                fontSize: 18,
+                fontSize: 16,
             },
         },
         vAxis: {
@@ -90,7 +112,6 @@ function drawGenresChart() {
 
     const options = {
         backgroundColor: 'transparent',
-        bars: 'horizontal',
         chartArea:{
             backgroundColor: 'transparent',
         },

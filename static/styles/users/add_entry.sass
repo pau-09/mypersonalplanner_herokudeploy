@@ -1,0 +1,52 @@
+@use '../variables' as *
+
+main
+    grid-template-rows: auto 1fr
+    position: relative
+    overflow-y: scroll
+    place-items: center
+
+h2
+    color: $purple5
+
+form
+    width: 80%
+    height: 80%
+    display: flex
+    justify-content: center
+    flex-direction: column
+    gap: 1.5rem
+    div
+        display: grid
+        grid-template-columns: 1fr 10fr
+        gap: 0.5rem
+        align-items: center
+
+.fa-clipboard-list, .fa-heading, .fa-user, .fa-calendar-days, .fa-book, .fa-film
+    justify-self: center
+    color: $purple5
+
+input, select
+    background-color: $sheer_purple4
+    font-family: quicksand
+    color: white
+    font-weight: bold
+    border: none
+    border-radius: 0.5rem
+    padding: 0.5rem
+    outline: none
+
+    &[type="submit"]
+        grid-column: 1 / span 2
+
+        &:hover
+            background-color: $orange1
+
+    &:hover
+        background-color: $purple3
+
+    &::placeholder
+        color: $white
+
+    &:focus
+        outline: 1px solid $sheer_white

@@ -6,29 +6,25 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>My Personal Planner</title>
-    <link rel="stylesheet" href="{% static 'styles/base/base.css' %}">
-    <link rel="stylesheet" href="{% static 'fontawesomefree/css/solid.css' %}">
-	<link rel="stylesheet" href="{% static 'sweetalert/dist/sweetalert2.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/base/base.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'sweetalert/dist/sweetalert2.css' %}">
 	{% block style%}
 	{% endblock %}
-	<script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+	<script src="https://kit.fontawesome.com/e98ca0b4f8.js" crossorigin="anonymous"></script>
 	<script src="{% static 'sweetalert/dist/sweetalert2.js' %}"></script>
 </head>
 <body>
 	<header>
-			<h1 class="title">My Personal Planner</h1>
-			<div>
-				<label id="menu_label" for="menu_checkbox"><i class="fa-solid fa-bars fa-lg"></i></label>
-				<p id="user_welcome">Hola <b>{{request.user}}</b></p>
-				<input type="checkbox" id="menu_checkbox"/>
-			<div>
+		<h1 class="title">My Personal Planner</h1>
+		<div>
+			<label id="menu_label" for="menu_checkbox"><i class="fa-solid fa-bars fa-lg"></i></label>
+			<p id="user_welcome">Hola <b>{{request.user}}</b></p>
+			<input type="checkbox" id="menu_checkbox"/>
 				<a href="{% url 'main' %}"><i class="fa-solid fa-house-chimney fa-lg"></i></a>
 				{% if request.user.is_staff %}
 					<a href="{% url 'addEntry' %}"><i class="fa-solid fa-circle-plus fa-lg"></i></a>
 				{% endif %}
-				{% comment %} <a href="{% url 'search' %}"><i class="fa-solid fa-magnifying-glass fa-lg"></i></a> {% endcomment %}
 				<a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket fa-lg"></i></a>
-			</div>
 		</div>
 	</header>
 	<nav>
@@ -52,50 +48,21 @@
 		</ul>
 	</nav>
 	<main id='toast_target'>
-		<div id="hide_content"></div>
 		{% block content%}
 		{% endblock %}
 	</main>
 	<footer>
 		<h3 class="title">My Personal Planner</h3>
-		{% comment %} <p>Esta web forma parte de un proyecto de final de grado</p> {% endcomment %}
+		<div>
+			<i class="fa-solid fa-book-quran fa-rotate-180"></i>
+			<span>Paula Tudela Cabrera</span>
+			<a href="https://shorturl.at/frzB7" target="_blank">
+				<i class="fa-solid fa-broom"></i>
+			</a>
+		</div>
 	</footer>
-
-	<script>
-		document.addEventListener('DOMContentLoaded', setup)
-
-		function setup(e){
-			document.querySelector('#menu_label').addEventListener('click', toggleMenu)
-			try{
-				const el = document.querySelectorAll('li > a');
-				const url = document.location.href;
-				el.forEach((a)=>{
-					if (url==a.href){
-						a.className = 'act';
-					}
-				})
-			}catch(e){
-				console.error(e)
-			}
-		}
-
-		function toggleMenu(e){
-			const menu = document.querySelector('nav');
-			const content = document.querySelector('#hide_content');
-			const checkbox = document.querySelector('#menu_checkbox');
-			
-			if(checkbox.checked){
-				menu.style.display = 'none'
-				content.style.display = 'none'
-			}else{
-				menu.style.display = 'initial'
-				content.style.display = 'unset'
-			}
-		}
-	</script>
+	<script src="{% static 'js/base.js' %}" ></script>
 	{% block script %}
 	{% endblock %}
-
-
 	</body>
 </html>

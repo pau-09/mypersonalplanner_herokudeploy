@@ -2,40 +2,41 @@
 {% load static %}
 
 {% block style %}
-	<link rel="stylesheet" href={% static 'styles/lists/list.css' %}>
+	<link rel="stylesheet" type="text/css" href={% static 'styles/lists/list.css' %}>
 {% endblock %}
 
 {% block content %}
-	{% if books %} 
-		<h2>Libros {{title}}</h2>
-	{% elif movies %}
-		<h2>Películas {{title}}</h2>
-	{% endif %}
-
+	<h2>{{title}}</h2>
 	<table>
 		<thead>
 			<tr>
 				<th id='id'></th>
 				<th id='title'>Título</th>
 				{% if books %}
-					<th id='author'>Autor</th>
-				{% else %}
-					<th id='year'>Año</th>
-				{% endif %}
+					<th id='author'>Autor/a</th>
+					{% else %}
+					<th id='director'>Director/a</th>
+					{% endif %}
+				<th id='year'>Año</th>
 				<th id='genre'>Género</th>
 				<th colspan=2><i class="fa-solid fa-plus fa-lg"></i></th>
 			</tr>
 		</thead>
 		<tbody>
-		{% if books%} 
+		{% if books %} 
 			{% for book in books %}
 				<tr>
 					<td>{{forloop.counter}}</td>
 					<td>{{book.title}}</td>
 					<td>{{book.author}}</td>
+					<td>{{book.year}}</td>
 					<td>{{book.genre}}</td>
-					<td id="{{book.id}}"><i class="fa-solid fa-pen fa-lg"></i></td>
-					<td id="{{book.id}}" data-title="{{book.title}}"><i class="fa-solid fa-trash-can fa-lg"></i></td>
+					<td id="{{book.id}}">
+						<i class="fa-solid fa-pen fa-lg"></i>
+					</td>
+					<td id="{{book.id}}" data-title="{{book.title}}">
+						<i class="fa-solid fa-trash-can fa-lg"></i>
+					</td>
 				</tr>
 			{% endfor %}
 		{% elif movies %} 
@@ -43,10 +44,15 @@
 				<tr>
 					<td>{{forloop.counter}}</td>
 					<td>{{movie.title}}</td>
+					<td>{{movie.director}}</td>
 					<td>{{movie.year}}</td>
 					<td>{{movie.genre}}</td>
-					<td id="{{movie.id}}"><i class="fa-solid fa-pen fa-lg"></i></td>
-					<td id="{{movie.id}}" data-title="{{movie.title}}"><i class="fa-solid fa-trash-can fa-lg"></i></td>
+					<td id="{{movie.id}}">
+						<i class="fa-solid fa-pen fa-lg"></i>
+					</td>
+					<td id="{{movie.id}}" data-title="{{movie.title}}">
+						<i class="fa-solid fa-trash-can fa-lg"></i>
+					</td>
 				</tr>
 			{% endfor %}
 		{% else %}
@@ -63,7 +69,7 @@
 		entry_state = '{{state}}';
 		csrf_token = '{% csrf_token %}';
 		
-		{% if books %}
+		{% if books_to_add %}
 			form_edit_input_name = 'book_id';
 			form_add_input_name = 'new_book_id';
 			
@@ -78,7 +84,7 @@
 				'En espera': 'En espera'};
 			edit_alert_error = 'Este libro ya está ';
 
-		{% elif movies %}
+		{% elif movies_to_add %}
 			form_edit_input_name = 'movie_id';
 			form_add_input_name = 'new_movie_id';
 
@@ -94,11 +100,26 @@
 			edit_alert_error = 'Esta película ya está ';
 		{% endif %}
 
-		{% if toast %}
-			const Toast = {{toast|safe}}
-			Toast.fire({
-				icon: 'success', 
-			})
+		{% if toast_title %}
+			Swal.mixin({
+				title: "{{toast_title}}",
+				icon: "success",
+				toast: true,
+				position: "bottom-right",
+				showConfirmButton: false,
+				timer: 3000,
+				timerProgressBar: true,
+				didOpen: (toast) => {
+					toast.addEventListener("mouseenter", Swal.stopTimer)
+					toast.addEventListener("mouseleave", Swal.resumeTimer)
+				},
+				customClass: {
+					container: "toast",
+				},
+				background: "#CDF8B8",
+				color: "#958CAB",
+				target: "#toast_target"
+			}).fire()
 		{% endif %}
 	</script>
 	<script src = "{% static 'js/detail_list.js' %}"></script>

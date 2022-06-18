@@ -15,7 +15,6 @@
 *, *::before, *::after {
   margin: 0px;
   padding: 0px;
-  cursor: url(../../cursor.cur), auto !important;
 }
 
 body {

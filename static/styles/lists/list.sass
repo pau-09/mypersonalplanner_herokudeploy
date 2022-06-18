@@ -1,7 +1,8 @@
 @use '../variables' as *
 
 main
-    overflow-y: auto
+    position: relative
+    overflow-y: scroll
     grid-template-rows: auto 1fr
 
 table
@@ -23,16 +24,20 @@ thead
                 width: 5%
         
             &:nth-child(2)
-                width: 50%
+                width: 40%
             
             &:nth-child(3)
                 width: 20%
             
             &:nth-child(4)
-                width: 15%
+                width: 10%
             
             &:nth-child(5)
+                width: 15%
+            
+            &:nth-child(6)
                 width: 10%
+
             &:hover
                 background-color: $orange2
                     
@@ -41,7 +46,7 @@ thead, tr, th, td
     padding: 0.2rem
     text-align: center
 
-tr>td:nth-child(5):hover, tr>td:nth-child(6):hover
+tr>td:nth-child(6):hover, tr>td:nth-child(7):hover
     background-color: $purple5
 
 tr, th, td
@@ -56,13 +61,15 @@ h2
     padding-top: 1rem
     color: $purple4
 
-#toast_target
-    position: relative
 
-.toast
-    position: absolute !important
-
-
+/* Mobile */
 @media screen and (max-width: 760px)
-    thead>tr>th:nth-child(4),thead>tr>th:nth-child(3), tbody>tr>td:nth-child(4), tbody>tr>td:nth-child(3)
-        display: none
+    tr
+        >th:nth-child(3), >th:nth-child(4), >th:nth-child(5), >td:nth-child(3), >td:nth-child(4), >td:nth-child(5)
+            display: none
+
+/* Tablet */
+@media screen and (min-width: 761px) and (max-width: 1080px) 
+    tr
+        >th:nth-child(3), >th:nth-child(4), >td:nth-child(3), >td:nth-child(4)
+            display: none

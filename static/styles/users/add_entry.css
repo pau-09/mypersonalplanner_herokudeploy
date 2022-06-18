@@ -1,0 +1,62 @@
+main {
+  grid-template-rows: auto 1fr;
+  position: relative;
+  overflow-y: scroll;
+  place-items: center;
+}
+
+h2 {
+  color: #694D8D;
+}
+
+form {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+form div {
+  display: grid;
+  grid-template-columns: 1fr 10fr;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.fa-clipboard-list, .fa-heading, .fa-user, .fa-calendar-days, .fa-book, .fa-film {
+  justify-self: center;
+  color: #694D8D;
+}
+
+input, select {
+  background-color: rgba(131, 104, 167, 0.5568627451);
+  font-family: quicksand;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  outline: none;
+}
+input[type=submit], select[type=submit] {
+  grid-column: 1/span 2;
+}
+input[type=submit]:hover, select[type=submit]:hover {
+  background-color: #D88BA4;
+}
+input:hover, select:hover {
+  background-color: #9770A6;
+}
+input::-moz-placeholder, select::-moz-placeholder {
+  color: #EBE1F7;
+}
+input:-ms-input-placeholder, select:-ms-input-placeholder {
+  color: #EBE1F7;
+}
+input::placeholder, select::placeholder {
+  color: #EBE1F7;
+}
+input:focus, select:focus {
+  outline: 1px solid rgba(235, 225, 247, 0.5019607843);
+}/*# sourceMappingURL=add_entry.css.map */

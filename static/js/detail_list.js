@@ -1,17 +1,16 @@
-const add_button = document.querySelector('thead>tr>th:nth-child(5)')
+const add_button = document.querySelector('thead>tr>th:nth-child(6)')
 add_button.addEventListener('click', addEntry)
 
-const edit_buttons = document.querySelectorAll('tbody>tr>td:nth-child(5)')
+const edit_buttons = document.querySelectorAll('tbody>tr>td:nth-child(6)')
 edit_buttons.forEach(button => button.addEventListener('click', editEntry))
 
-const delete_buttons = document.querySelectorAll('tbody>tr>td:nth-child(6)')
+const delete_buttons = document.querySelectorAll('tbody>tr>td:nth-child(7)')
 delete_buttons.forEach(button => button.addEventListener('click', deleteEntry))
 
-const table_columns = Array.from(document.querySelectorAll('thead>tr>th')).slice(0, 4)
+const table_columns = Array.from(document.querySelectorAll('thead>tr>th')).slice(0, 5)
 table_columns.forEach(button => button.addEventListener('click', orderBy))
 
 async function addEntry(e){
-
     const steps = ['Titulo del libro', 'Estado del libro']
     const swalQueueStep = Swal.mixin({
         confirmButtonText: 'Siguiente',
@@ -35,7 +34,6 @@ async function addEntry(e){
 
         const result = await swalQueueStep.fire({
           title: `${steps[currentStep]}`,
-        //   inputPlaceholder: 'Selecciona una opción',
           inputOptions: input_options,
           showCancelButton: currentStep > 0,
           currentProgressStep: currentStep
@@ -107,9 +105,8 @@ async function editEntry(e){
             const form = document.createElement('form');
             form.setAttribute('method','POST');
             form.setAttribute('action', document.location.href);
-            main.appendChild(form);
-    
             form.innerHTML = csrf_token;
+            main.appendChild(form);
     
             const entry = document.createElement('input');
             entry.setAttribute('type', 'hidden');
@@ -124,7 +121,6 @@ async function editEntry(e){
             form.appendChild(new_state);
             
             form.submit();
-            
         }
     })
     
@@ -151,9 +147,8 @@ async function deleteEntry(e){
             const form = document.createElement('form');
             form.setAttribute('method','POST');
             form.setAttribute('action',document.location.href);
-            main.appendChild(form);
-    
             form.innerHTML = csrf_token;
+            main.appendChild(form);
     
             const entry = document.createElement('input');
             entry.setAttribute('type', 'hidden');
@@ -174,9 +169,8 @@ function orderBy(e){
     const form = document.createElement('form');
     form.setAttribute('method','POST');
     form.setAttribute('action', document.location.href);
-    main.appendChild(form);
-
     form.innerHTML = csrf_token;
+    main.appendChild(form);
 
     const entry = document.createElement('input');
     entry.setAttribute('type', 'hidden');

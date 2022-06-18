@@ -818,20 +818,20 @@
     width: 2em;
     height: 2em;
     border-radius: 2em;
-    background: #2778c4;
+    background: #8368A7;
     color: #fff;
     line-height: 2em;
     text-align: center;
 }
 .swal2-progress-steps .swal2-progress-step.swal2-active-progress-step {
-    background: #2778c4;
+    background: #A777A6;
 }
 .swal2-progress-steps .swal2-progress-step.swal2-active-progress-step ~ .swal2-progress-step {
-    background: #add8e6;
+    background: #8368A78E;
     color: #fff;
 }
 .swal2-progress-steps .swal2-progress-step.swal2-active-progress-step ~ .swal2-progress-step-line {
-    background: #add8e6;
+    background: #8368A78E;
 }
 .swal2-progress-steps .swal2-progress-step-line {
     z-index: 10;
@@ -839,7 +839,7 @@
     width: 2.5em;
     height: 0.4em;
     margin: 0 -1px;
-    background: #2778c4;
+    background: #8368A7;
 }
 
 [class^=swal2] {

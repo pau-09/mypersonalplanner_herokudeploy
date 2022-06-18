@@ -1,68 +1,104 @@
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawBookChart);
-google.charts.setOnLoadCallback(drawMovieChart);
+google.charts.load('current', {'packages':['corechart', 'bar']});
 
-function drawBookChart() {
-    var data = google.visualization.arrayToDataTable(books);
+if(!book_count && !movie_count){
+    removeChartsDivs();
+}else{
+    google.charts.setOnLoadCallback(drawStatesChart);
+    google.charts.setOnLoadCallback(drawTotalCountChart);
+}
 
+function removeChartsDivs(){
+    const main = document.querySelector('main');
+
+    main.removeChild(document.querySelector('#totalCountChart'));
+    main.removeChild(document.querySelector('hr'));
+    main.removeChild(document.querySelector('#statesChart'));
+
+    const warningDiv = document.createElement('div');
+    warningDiv.setAttribute('id', 'noDataDiv');
+    warningDiv.innerHTML = `<i><p>¡No tienes ninguna entrada!</p>
+        <p>Agrega al menos un libro o una película a una de tus listas.</p></i>`;
+    
+    main.appendChild(warningDiv);
+
+}
+
+function drawStatesChart() {
+    var data = google.visualization.arrayToDataTable(summaryData);
+    
     var options = {
-        title: 'Libros',
-        titleTextStyle: {
-            color: '#8368A7',
-            fontName: 'quicksand',
-            fontSize: 20, 
-            bold: true,
+        animation:{
+            duration: 500,
+            startup: true,
         },
         backgroundColor: 'transparent',
-        is3D: true,
+        colors: ["#F0A6A5", "#4570C3"],
+        fontName: 'Quicksand',
+        hAxis: {
+            textStyle: {
+                color: '#8368A7',
+                fontSize: 18, 
+                bold: true,
+            },
+        },
         legend:{
-            alignment: 'center'
+            position: 'bottom',
+            alignment: 'center',
+            textStyle: {
+                color: '#8368A7',
+                fontSize: 18,
+            },
         },
-        legendTextStyle: {
-            color: '#8368A7',
-            fontName: 'quicksand',
-            fontSize: 20,
+        vAxis: {
+            title:'',
+            baselineColor: '#8368A7',
+            textStyle: {
+                color: '#8368A7',
+                fontSize: 16, 
+                bold: true,
+            },
+            gridlines: {
+                color: '#B19ECA',
+                multiple: 1
+            },
+            minorGridlines: {
+                count: 0
+            },
         },
-        pieSliceTextStyle: {
-            color: '#9770A6',
-        },
-        colors: ['#CBFFC1', '#FCEDC4', '#FCC4C4', '#C4D3FC']
+    
     };
 
-    var chart = new google.visualization.PieChart(document.getElementById('bookChart'));
-
+    var chart = new google.visualization.ColumnChart(document.querySelector('#statesChart'));
     chart.draw(data, options);
 }
 
-function drawMovieChart() {
+function drawTotalCountChart() {
+    const data = new google.visualization.DataTable();
+    data.addColumn('string', 'Tipo')
+    data.addColumn('number', 'Total')
+    data.addRows([
+        ['Libros', book_count],
+        ['Películas', movie_count],
+    ])
 
-    var data = google.visualization.arrayToDataTable(movies);
-
-    var options = {
-        title: 'Películas',
-        titleTextStyle: {
-            color: '#8368A7',
-            fontName: 'quicksand',
-            fontSize: 20, 
-            bold: true,
-        },
+    const options = {
         backgroundColor: 'transparent',
+        colors: ["#F0A6A5", "#4570C3"],
+        fontName: 'Quicksand',
         is3D: true,
         legend:{
-            alignment: 'center'
+            alignment: 'center',
+            position: 'bottom',
         },
         legendTextStyle: {
             color: '#8368A7',
-            fontName: 'quicksand',
-            fontSize: 20,
+            fontSize: 18,
         },
         pieSliceTextStyle: {
-            color: '#9770A6',
+            color: '#201824',
         },
-        colors: ['#CBFFC1', '#FCEDC4', '#FCC4C4', '#C4D3FC']
     };
 
-    var chart = new google.visualization.PieChart(document.getElementById('movieChart'));
-
+    const chart = new google.visualization.PieChart(document.querySelector('#totalCountChart'));
     chart.draw(data, options);
 }

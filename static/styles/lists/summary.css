@@ -1,12 +1,5 @@
-main {
-  grid-template-rows: auto 1fr auto 1fr;
-  grid-template-columns: 3fr auto 4fr;
-}
-
-main > h2 {
-  place-self: center start;
-  padding-left: 1rem;
-  grid-column: 1/span 3;
+h2 {
+  place-self: center;
   color: #694D8D;
 }
 
@@ -14,36 +7,118 @@ hr {
   border: solid rgba(131, 104, 167, 0.5568627451) 1px;
 }
 
-div {
-  font-family: quicksand;
+#noDataDiv {
+  display: grid;
+  place-content: center;
+  color: rgba(131, 104, 167, 0.5568627451);
+  text-align: center;
 }
 
-.sideChart {
-  width: 95%;
-  height: 95%;
-  place-self: start center;
-}
+/* Mobile */
+@media screen and (max-width: 760px) {
+  #summaryChart {
+    height: 55%;
+  }
 
-#summaryChart {
-  width: 100%;
-  height: 100%;
-  grid-row: 2/span 4;
-  place-self: center;
+  .sideChart {
+    height: 80%;
+  }
 }
+/* Mobile + Tablet */
+@media screen and (max-width: 1080px) {
+  main {
+    display: block;
+    min-height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
 
-#horizontal {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  width: 90%;
-  grid-column: 3;
+  h2 {
+    padding-left: 1rem;
+    color: #694D8D;
+    font-size: 23px;
+  }
+
+  hr {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    width: 90%;
+    margin: 5%;
+  }
+
+  #authorsChart {
+    padding-left: 1rem;
+  }
+
+  #noDataDiv {
+    padding-top: 5rem;
+  }
+
+  .sideChart {
+    width: 95%;
+  }
 }
+/* Tablet */
+@media screen and (min-width: 761px) and (max-width: 1080px) {
+  #summaryChart {
+    height: 55%;
+  }
 
-#vertical {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: 90%;
-  place-self: center;
-  grid-row: 2/span 4;
+  .sideChart {
+    height: 65%;
+  }
+}
+/* PC */
+@media screen and (min-width: 1081px) {
+  main {
+    grid-template-rows: auto 1fr auto 1fr;
+    grid-template-columns: 3fr auto 4fr;
+  }
+
+  h2 {
+    padding-left: 1rem;
+    grid-column: 1/span 3;
+  }
+
+  div {
+    font-family: quicksand;
+  }
+
+  .sideChart {
+    width: 95%;
+    height: 95%;
+    place-self: start center;
+  }
+
+  #summaryChart {
+    width: 100%;
+    height: 100%;
+    grid-row: 2/span 4;
+    place-self: center;
+  }
+
+  #horizontal {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    width: 90%;
+    grid-column: 3;
+  }
+
+  #vertical {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    height: 90%;
+    place-self: center;
+    grid-row: 2/span 4;
+  }
+
+  #noDataDiv {
+    place-self: center;
+    justify-content: center;
+    grid-row: 2/span 4;
+    grid-column: 1/span 3;
+  }
 }/*# sourceMappingURL=summary.css.map */
